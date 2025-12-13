@@ -1,0 +1,9 @@
+# Ignore Data
+data/
+*.csv
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+

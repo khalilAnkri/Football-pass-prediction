@@ -18,7 +18,6 @@ def train_model(X_features, y_target):
     
     # Calibration Wrapper
     # 'isotonic' is good for large data, 'sigmoid' for smaller. 
-    # With ~100k rows (train set size * 22), isotonic is safe.
     clf = CalibratedClassifierCV(gb, method='isotonic', cv=3)
     
     clf.fit(X_features, y_target)
@@ -39,7 +38,6 @@ def predict_pass_probabilities(model, X_features, original_indices):
     return results
 
 def evaluate_predictions(y_true, probas_df):
-    # (Keep this function exactly the same as before)
     # The Brier Score calculation here is correct for the competition
     pass_ids = y_true.index.unique()
     y_true_sorted = y_true.loc[pass_ids]
@@ -50,7 +48,6 @@ def evaluate_predictions(y_true, probas_df):
     for pid in pass_ids:
         pass_data = probas_df[probas_df['pass_id'] == pid].reset_index(drop=True)
         
-        # Careful: ensure sort by candidate_id if needed, but usually 1..22 is implicit
         p_slice = pass_data['normalized_proba'].values
         
         best_candidate_idx = np.argmax(p_slice) 

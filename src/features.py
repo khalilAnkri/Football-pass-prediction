@@ -67,7 +67,6 @@ def compute_features(X_df, y_df=None):
         opp_coords = [(row[f'x_{oid}'], row[f'y_{oid}']) for oid in opp_ids]
 
         for c_id in range(1, 23):
-            # Skip sender? (Technically possible to pass to self as dribble, but rare)
             # We keep it for consistency but expect low prob.
             
             c_x, c_y = row[f'x_{c_id}'], row[f'y_{c_id}']
@@ -78,7 +77,6 @@ def compute_features(X_df, y_df=None):
             team = is_same_team(s_id, c_id)
             fwd_prog = (c_x - s_x) * attack_dir
 
-            # --- ADVANCED TACTICAL FEATURES ---
             
             # 1. Congestion (Opponents within 3m / 300cm)
             congestion_count = 0
